@@ -10,7 +10,7 @@ gem 'gravatar_image_tag'
 gem 'will_paginate'
 
 group :development do
-  gem 'rspec-rails', '2.14.2'
+  gem 'rspec-rails', '2.99.0'
   #gem 'annotate-models'
   gem 'annotate'
 end

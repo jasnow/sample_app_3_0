@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe MicropostsController do
+describe MicropostsController, :type => :controller do
   render_views
 
   describe "access control" do
 
     it "should deny access to 'create'" do
       post :create
-      response.should redirect_to(signin_path)
+      expect(response).to redirect_to(signin_path)
     end
 
     it "should deny access to 'destroy'" do
       delete :destroy, :id => 1
-      response.should redirect_to(signin_path)
+      expect(response).to redirect_to(signin_path)
     end
   end
 
@@ -29,14 +29,14 @@ describe MicropostsController do
       end
 
       it "should not create a micropost" do
-        lambda do
+        expect do
           post :create, :micropost => @attr
-        end.should_not change(Micropost, :count)
+        end.not_to change(Micropost, :count)
       end
 
       it "should render the home page" do
         post :create, :micropost => @attr
-        response.should render_template('pages/home')
+        expect(response).to render_template('pages/home')
       end
     end
 
@@ -47,19 +47,19 @@ describe MicropostsController do
       end
 
       it "should create a micropost" do
-        lambda do
+        expect do
           post :create, :micropost => @attr
-        end.should change(Micropost, :count).by(1)
+        end.to change(Micropost, :count).by(1)
       end
 
       it "should redirect to the home page" do
         post :create, :micropost => @attr
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
 
       it "should have a flash message" do
         post :create, :micropost => @attr
-        flash[:success].should =~ /micropost created/i
+        expect(flash[:success]).to match(/micropost created/i)
       end
     end
   end
@@ -77,7 +77,7 @@ describe MicropostsController do
 
       it "should deny access" do
         delete :destroy, :id => @micropost
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -89,9 +89,9 @@ describe MicropostsController do
       end
 
       it "should destroy the micropost" do
-        lambda do 
+        expect do 
           delete :destroy, :id => @micropost
-        end.should change(Micropost, :count).by(-1)
+        end.to change(Micropost, :count).by(-1)
       end
     end
   end

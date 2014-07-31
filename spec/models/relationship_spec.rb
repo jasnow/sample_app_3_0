@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Relationship do
+describe Relationship, :type => :model do
 
   before(:each) do
     @follower = FactoryGirl.create(:user)
@@ -20,31 +20,31 @@ describe Relationship do
     end
 
     it "should have a follower attribute" do
-      @relationship.should respond_to(:follower)
+      expect(@relationship).to respond_to(:follower)
     end
 
     it "should have the right follower" do
-      @relationship.follower.should == @follower
+      expect(@relationship.follower).to eq(@follower)
     end
 
     it "should have a followed attribute" do
-      @relationship.should respond_to(:followed)
+      expect(@relationship).to respond_to(:followed)
     end
 
     it "should have the right followed user" do
-      @relationship.followed.should == @followed
+      expect(@relationship.followed).to eq(@followed)
     end
   end
 
   describe "validations" do
     it "should require a follower_id" do
       @relationship.follower_id = nil
-      @relationship.should_not be_valid
+      expect(@relationship).not_to be_valid
     end
 
     it "should require a followed_id" do
       @relationship.followed_id = nil
-      @relationship.should_not be_valid
+      expect(@relationship).not_to be_valid
     end
   end
 
@@ -52,8 +52,8 @@ describe Relationship do
   describe "dependent :destroy" do
    it "should check that destroyed relationships are gone" do
       @follower.destroy
-      Relationship.find_by_id(@relationship.id).should be_nil
-      Relationship.find_by_id(@reverse_relationship.id).should be_nil
+      expect(Relationship.find_by_id(@relationship.id)).to be_nil
+      expect(Relationship.find_by_id(@reverse_relationship.id)).to be_nil
     end
   end
 end

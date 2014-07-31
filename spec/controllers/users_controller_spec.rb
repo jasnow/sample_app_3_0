@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, :type => :controller do
   render_views
 
   describe "GET 'show'" do
@@ -13,56 +13,56 @@ describe UsersController do
       35.times { FactoryGirl.create(:micropost, :user => @user, :content => "foo") }
       FactoryGirl.create(:micropost, :user => @user, :content => "a" * 55)
       get :show, :id => @user
-      response.should have_selector('div.pagination')
+      expect(response).to have_selector('div.pagination')
     end
 
     it "should be successful" do
       get :show, :id => @user
-      response.should be_success
+      expect(response).to be_success
     end
     
     it "should have the right title" do
       get :show, :id => @user
-      assigns(:user).should == @user
+      expect(assigns(:user)).to eq(@user)
     end
 
     it "should include the users name" do
       get :show, :id => @user
-      response.should have_selector("h1", :content => @user.name)
+      expect(response).to have_selector("h1", :content => @user.name)
     end
 
     it "should have a profile image" do
       get :show, :id => @user
-      response.should have_selector("h1>img", :class => "gravatar")
+      expect(response).to have_selector("h1>img", :class => "gravatar")
     end
   end
 
   describe "GET 'new'" do
     it "should be successful" do
       get 'new'
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should have the right title" do
       get 'new'
-      response.should have_selector("title", :content => "Sign up")
+      expect(response).to have_selector("title", :content => "Sign up")
     end
 
     it "should have a name field" do
       get :new
-      response.should have_selector("input[name='user[name]'][type='text']")
+      expect(response).to have_selector("input[name='user[name]'][type='text']")
     end
     it "should have a email field" do
       get :new
-      response.should have_selector("input[name='user[email]'][type='text']")
+      expect(response).to have_selector("input[name='user[email]'][type='text']")
     end
     it "should have a password field" do
       get :new
-      response.should have_selector("input[name='user[password]'][type='password']")
+      expect(response).to have_selector("input[name='user[password]'][type='password']")
     end
     it "should have a password confirmation field" do
       get :new
-      response.should have_selector("input[name='user[password_confirmation]'][type='password']")
+      expect(response).to have_selector("input[name='user[password_confirmation]'][type='password']")
     end
   end
 
@@ -74,19 +74,19 @@ describe UsersController do
       end
 
       it "should not create a user" do
-        lambda do
+        expect do
           post :create, :user => @attr
-        end.should_not change(User, :count)
+        end.not_to change(User, :count)
       end
 
       it "should have the right title" do
         post :create, :user => @attr
-        response.should have_selector("title", :content => "Sign up")
+        expect(response).to have_selector("title", :content => "Sign up")
       end
 
       it "should render the 'new page'" do
         post :create, :user => @attr
-        response.should render_template('new')
+        expect(response).to render_template('new')
       end
     end
 
@@ -97,24 +97,24 @@ describe UsersController do
       end
 
      it "should create a user" do
-        lambda do
+        expect do
           post :create, :user => @attr
-        end.should change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
 
       it "should redirect to the user show page" do
         post :create, :user => @attr
-        response.should redirect_to(user_path(assigns(:user)))
+        expect(response).to redirect_to(user_path(assigns(:user)))
       end
 
       it "should have a welcome message" do
         post :create, :user => @attr
-        flash[:success].should =~ /welcome to the sample app/i
+        expect(flash[:success]).to match(/welcome to the sample app/i)
       end
 
       it "should sign the user in" do
         post :create, :user => @attr
-        controller.should be_signed_in
+        expect(controller).to be_signed_in
       end
     end
   end
@@ -132,13 +132,13 @@ describe UsersController do
 
     it "should have the right title" do
       get :edit, :id => @user
-      response.should have_selector("title", :content => "Edit user")
+      expect(response).to have_selector("title", :content => "Edit user")
     end
 
     it "should have a link to change the Gravatar" do
       get :edit, :id => @user
       gravatar_url = "http://gravatar.com/emails"
-      response.should have_selector("a", :href => gravatar_url, :content => "change")
+      expect(response).to have_selector("a", :href => gravatar_url, :content => "change")
     end
 
   end # get/edit
@@ -158,12 +158,12 @@ describe UsersController do
 
       it "should render the 'edit' page" do
         put :update, :id => @user, :user => @attr
-        response.should render_template('edit')
+        expect(response).to render_template('edit')
       end
 
       it "should have the right title" do
         put :update, :id => @user, :user => @attr
-        response.should have_selector("title", :content => "Edit user")
+        expect(response).to have_selector("title", :content => "Edit user")
       end
     end
 
@@ -176,18 +176,18 @@ describe UsersController do
       it "should change the user's attributes" do
         put :update, :id => @user, :user => @attr
         @user.reload
-        @user.name.should  == @attr[:name]
-        @user.email.should == @attr[:email]
+        expect(@user.name).to  eq(@attr[:name])
+        expect(@user.email).to eq(@attr[:email])
       end
 
       it "should redirect to the user show page" do
         put :update, :id => @user, :user => @attr
-        response.should redirect_to(user_path(@user))
+        expect(response).to redirect_to(user_path(@user))
       end
 
       it "should have a flash message" do
         put :update, :id => @user, :user => @attr
-        flash[:success].should =~ /updated/
+        expect(flash[:success]).to match(/updated/)
       end
     end
   end
@@ -201,12 +201,12 @@ describe UsersController do
 
       it "should deny access to 'edit'" do
         get :edit, :id => @user
-        response.should redirect_to(signin_path)
+        expect(response).to redirect_to(signin_path)
       end
 
       it "should deny access to 'update'" do
         get :update, :id => @user, :user => {}
-        response.should redirect_to(signin_path)
+        expect(response).to redirect_to(signin_path)
       end
     end
 
@@ -218,12 +218,12 @@ describe UsersController do
 
       it "should require matching users for 'edit'" do
         get :edit, :id => @user
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
 
       it "should require matching users for 'update'" do
         get :update, :id => @user, :user => {}
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
   end
@@ -233,8 +233,8 @@ describe UsersController do
     describe "for non-signed-in users" do
       it "should deny access" do
         get :index
-        response.should redirect_to(signin_path)
-        flash[:notice].should =~ /sign in/i
+        expect(response).to redirect_to(signin_path)
+        expect(flash[:notice]).to match(/sign in/i)
       end
     end
 
@@ -251,57 +251,57 @@ describe UsersController do
 
       it "should be successful" do
         get :index
-        response.should be_success
+        expect(response).to be_success
       end
 
       it "should have the right title" do
         get :index
-        response.should have_selector("title", :content => "All users")
+        expect(response).to have_selector("title", :content => "All users")
       end
 
       it "should have an element for each user" do
         get :index
         @users[0..2].each do |user|
-          response.should have_selector("li", :content => user.name)
+          expect(response).to have_selector("li", :content => user.name)
         end
       end
 
       it "should paginate users" do
         get :index
-        response.should have_selector("div.pagination")
-        response.should have_selector("span.disabled", :content => "Previous")
-        response.should have_selector("a", :href => "/users?page=2", :content => "2") 
-        response.should have_selector("a", :href => "/users?page=2", :content => "Next")
+        expect(response).to have_selector("div.pagination")
+        expect(response).to have_selector("span.disabled", :content => "Previous")
+        expect(response).to have_selector("a", :href => "/users?page=2", :content => "2") 
+        expect(response).to have_selector("a", :href => "/users?page=2", :content => "Next")
       end
 
       # Exercise 11.5..2:
       it "should display the micropost count" do
         10.times { FactoryGirl.create(:micropost, :user => @user, :content => "foo") }
         get :show, :id => @user
-        response.should have_selector('td.sidebar', :content => @user.microposts.count.to_s)
+        expect(response).to have_selector('td.sidebar', :content => @user.microposts.count.to_s)
       end
 
       # Next two tests are for Chapter 10 (Exercise 4).
       it "should not see delete links if not admin" do
         get :index
-        response.should_not have_selector("a", :href => "/users/2", :content => "delete")
+        expect(response).not_to have_selector("a", :href => "/users/2", :content => "delete")
       end
 
       it "should see delete links if admin" do
-        pending
+        skip
         fourth = FactoryGirl.create(:user, :email => "seedelete@example.com")
         fourth.toggle!(:admin) 
         test_sign_in(fourth) # admin
         get :index
-        response.should have_selector("a", :href => "/users/2", :content => "delete")
+        expect(response).to have_selector("a", :href => "/users/2", :content => "delete")
       end
 
       it "should show the user's microposts" do
         mp1 = FactoryGirl.create(:micropost, :user => @user, :content => "Foo bar")
         mp2 = FactoryGirl.create(:micropost, :user => @user, :content => "Baz guux")
         get :show, :id => @user
-        response.should have_selector("span.content", :content => mp1.content)
-        response.should have_selector("span.content", :content => mp2.content)
+        expect(response).to have_selector("span.content", :content => mp1.content)
+        expect(response).to have_selector("span.content", :content => mp2.content)
       end
 
       # Exercise 11.5.6: 
@@ -309,12 +309,12 @@ describe UsersController do
         mp3 = FactoryGirl.create(:micropost, :user => @second, :content => "Foo bar")
         mp4 = FactoryGirl.create(:micropost, :user => @second, :content => "Baz guux")
         get :show, :id => @user
-        response.should_not have_selector("span.content", :content => mp3.content)
-        response.should_not have_selector("span.content", :content => mp4.content)
+        expect(response).not_to have_selector("span.content", :content => mp3.content)
+        expect(response).not_to have_selector("span.content", :content => mp4.content)
 
         get :show, :id => @second
-        response.should have_selector("span.content", :content => mp3.content)
-        response.should have_selector("span.content", :content => mp4.content)
+        expect(response).to have_selector("span.content", :content => mp3.content)
+        expect(response).to have_selector("span.content", :content => mp4.content)
       end
     end
   end
@@ -327,7 +327,7 @@ describe UsersController do
     describe "as a non-signed-in user" do
       it "should deny access" do
         delete :destroy, :id => @user
-        response.should redirect_to(signin_path)
+        expect(response).to redirect_to(signin_path)
       end
     end
 
@@ -335,7 +335,7 @@ describe UsersController do
       it "should protect the page" do
         test_sign_in(@user)
         delete :destroy, :id => @user
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -346,21 +346,21 @@ describe UsersController do
       end
 
       it "should destroy the user" do
-        lambda do
+        expect do
           delete :destroy, :id => @user
-        end.should change(User, :count).by(-1) 
+        end.to change(User, :count).by(-1) 
       end
 
       it "should redirect to the users page" do
         delete :destroy, :id => @user
-        flash[:success].should =~ /destroyed/ 
-        response.should redirect_to(users_path)
+        expect(flash[:success]).to match(/destroyed/) 
+        expect(response).to redirect_to(users_path)
       end
 
       it "should not be able to destroy itself" do
-        lambda do
+        expect do
           delete :destroy, :id => @admin
-        end.should change(User, :count).by(0)
+        end.to change(User, :count).by(0)
       end
    end
  
@@ -370,12 +370,12 @@ describe UsersController do
     describe "when not signed in" do
       it "should protect 'following'" do
         get :following, :id => 1
-        response.should redirect_to(signin_path)
+        expect(response).to redirect_to(signin_path)
       end
 
       it "should protect 'followers'" do
         get :followers, :id => 1
-        response.should redirect_to(signin_path)
+        expect(response).to redirect_to(signin_path)
       end
     end
 
@@ -388,13 +388,13 @@ describe UsersController do
 
       it "should show user following" do
         get :following, :id => @user
-        response.should have_selector("a", :href => user_path(@other_user),
+        expect(response).to have_selector("a", :href => user_path(@other_user),
                                            :content => @other_user.name)
       end
 
       it "should show user followers" do
         get :followers, :id => @other_user
-        response.should have_selector("a", :href => user_path(@user),
+        expect(response).to have_selector("a", :href => user_path(@user),
                                            :content => @user.name)
       end
     end

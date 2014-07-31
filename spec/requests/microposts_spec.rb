@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Microposts" do
+describe "Microposts", :type => :request do
 
   before(:each) do
     user = FactoryGirl.create(:user)
@@ -15,13 +15,13 @@ describe "Microposts" do
     describe "failure" do
 
       it "should not make a new micropost" do
-        lambda do
+        expect do
           visit root_path
           fill_in :micropost_content, :with => ""
           click_button
-          response.should render_template('pages/home')
-          response.should have_selector("div#error_explanation")
-        end.should_not change(Micropost, :count)
+          expect(response).to render_template('pages/home')
+          expect(response).to have_selector("div#error_explanation")
+        end.not_to change(Micropost, :count)
       end
     end
 
@@ -29,12 +29,12 @@ describe "Microposts" do
 
       it "should make a new micropost" do
         content = "Lorem ipsum dolor sit amet"
-        lambda do
+        expect do
           visit root_path
           fill_in :micropost_content, :with => content
           click_button
-          response.should have_selector("span.content", :content => content)
-        end.should change(Micropost, :count).by(1)
+          expect(response).to have_selector("span.content", :content => content)
+        end.to change(Micropost, :count).by(1)
       end
     end
   end
