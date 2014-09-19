@@ -1,1 +1,1 @@
-rvm --default use 2.1.2@sp30 --create
+rvm --default use 2.1.3@sp30 --create
