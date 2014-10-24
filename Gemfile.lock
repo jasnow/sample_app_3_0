@@ -35,7 +35,7 @@ GEM
     arel (2.0.10)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
-    autotest-fsevent (0.2.9)
+    autotest-fsevent (0.2.10)
       sys-uname
     autotest-growl (0.2.16)
     autotest-rails-pure (4.1.2)
@@ -125,7 +125,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.41)
+    tzinfo (0.3.42)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
