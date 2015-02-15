@@ -26,6 +26,7 @@ group :test do
   gem 'webrat'
   gem 'spork'
   gem 'factory_girl_rails'
+  gem 'test-unit'
 end
 
 group :development, :test do
