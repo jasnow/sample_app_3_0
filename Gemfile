@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem "rake"
 
-#gem 'rails', :git => 'https://github.com/rails/rails.git', :branch => '3-0-stable'
 gem 'rails', '3.0.20'
 
 gem 'taps'
