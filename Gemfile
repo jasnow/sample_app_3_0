@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-gem "rake"
-
 gem 'rails', '3.0.20'
+gem 'ffi', '1.9.6'
+
+gem "rake"
 
 gem 'taps'
 gem 'gravatar_image_tag'
@@ -18,7 +19,7 @@ group :test do
   gem 'autotest'
   gem 'autotest-rails-pure'
   gem 'autotest-growl'
-  gem "ffi"
+  #BROKEN: gem "ffi"
   gem 'faker'
   gem 'autotest-fsevent'
   gem 'rspec'

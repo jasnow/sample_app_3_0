@@ -29,7 +29,7 @@ GEM
       activemodel (= 3.0.20)
       activesupport (= 3.0.20)
     activesupport (3.0.20)
-    annotate (2.6.6)
+    annotate (2.6.7)
       activerecord (>= 2.3.0)
       rake (~> 10.4.2, >= 10.4.2)
     arel (2.0.10)
@@ -146,7 +146,7 @@ DEPENDENCIES
   autotest-rails-pure
   factory_girl_rails
   faker
-  ffi
+  ffi (= 1.9.6)
   gravatar_image_tag
   pg
   rails (= 3.0.20)
