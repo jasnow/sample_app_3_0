@@ -3,9 +3,11 @@ rvm:
   - "2.2.3"
 before_script: rake db:setup
 before_script: bundle exec rake db:setup
+cache: bundler
 notifications:
   email:
     recipients:
     - jasnow@hotmail.com
     on_success: change
     on_failure: always
+sudo: false
