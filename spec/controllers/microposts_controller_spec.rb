@@ -89,7 +89,7 @@ describe MicropostsController, :type => :controller do
       end
 
       it "should destroy the micropost" do
-        expect do 
+        expect do
           delete :destroy, :id => @micropost
         end.to change(Micropost, :count).by(-1)
       end

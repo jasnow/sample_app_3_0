@@ -25,38 +25,38 @@ describe "LayoutLinks", :type => :request do
 
     it "should have a profile link" do
       visit root_path
-      expect(response).to have_selector("a", :href => user_path(@user), :content => "Profile") 
+      expect(response).to have_selector("a", :href => user_path(@user), :content => "Profile")
     end
   end
 
   describe "LayoutLinks" do
 
-    it "should have a Home Page at '/'" do 
+    it "should have a Home Page at '/'" do
       get '/'
       expect(response).to have_selector('title', :content => "Home")
     end
 
-    it "should have a Contact Page at '/contact'" do 
+    it "should have a Contact Page at '/contact'" do
       get '/contact'
       expect(response).to have_selector('title', :content => "Contact")
     end
 
-    it "should have a About Page at '/about'" do 
+    it "should have a About Page at '/about'" do
       get '/about'
       expect(response).to have_selector('title', :content => "About")
     end
 
-    it "should have a Help Page at '/help'" do 
+    it "should have a Help Page at '/help'" do
       get '/help'
       expect(response).to have_selector('title', :content => "Help")
     end
 
-    it "should have a signup Page at '/signup'" do 
+    it "should have a signup Page at '/signup'" do
       get '/signup'
       expect(response).to have_selector('title', :content => "Sign up")
     end
 
-    it "should have the right links on the layout" do 
+    it "should have the right links on the layout" do
       visit root_path
 
       click_link "About"

@@ -2,10 +2,10 @@ require 'rubygems'
 require 'spork'
 
 Spork.prefork do
-  # Loading more in this block will cause your tests to run faster. However, 
+  # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
-  ENV["RAILS_ENV"] ||= 'test'  
+  ENV["RAILS_ENV"] ||= 'test'
   unless defined?(Rails)
     require File.dirname(__FILE__) + "/../config/environment"
     #REMOVED: require File.expand_path("../../config/environment", __FILE__)
@@ -16,7 +16,7 @@ Spork.prefork do
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   #REMOVED: Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f } 
+  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
   RSpec.configure do |config|
 

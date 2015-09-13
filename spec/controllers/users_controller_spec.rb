@@ -20,7 +20,7 @@ describe UsersController, :type => :controller do
       get :show, :id => @user
       expect(response).to be_success
     end
-    
+
     it "should have the right title" do
       get :show, :id => @user
       expect(assigns(:user)).to eq(@user)
@@ -69,7 +69,7 @@ describe UsersController, :type => :controller do
   describe "POST 'create'" do
     describe "failure" do
       before(:each) do
-        @attr = { :name => "", :email => "", :password => "", 
+        @attr = { :name => "", :email => "", :password => "",
           :password_confirmation => "" }
       end
 
@@ -122,7 +122,7 @@ describe UsersController, :type => :controller do
   describe "GET 'edit'" do
 
     before(:each) do
-      @user = FactoryGirl.create(:user) 
+      @user = FactoryGirl.create(:user)
       test_sign_in(@user)
     end
 
@@ -146,7 +146,7 @@ describe UsersController, :type => :controller do
   describe "PUT 'update'" do
 
     before(:each) do
-      @user = FactoryGirl.create(:user) 
+      @user = FactoryGirl.create(:user)
       test_sign_in(@user)
     end
 
@@ -270,7 +270,7 @@ describe UsersController, :type => :controller do
         get :index
         expect(response).to have_selector("div.pagination")
         expect(response).to have_selector("span.disabled", :content => "Previous")
-        expect(response).to have_selector("a", :href => "/users?page=2", :content => "2") 
+        expect(response).to have_selector("a", :href => "/users?page=2", :content => "2")
         expect(response).to have_selector("a", :href => "/users?page=2", :content => "Next")
       end
 
@@ -290,7 +290,7 @@ describe UsersController, :type => :controller do
       it "should see delete links if admin" do
         skip
         fourth = FactoryGirl.create(:user, :email => "seedelete@example.com")
-        fourth.toggle!(:admin) 
+        fourth.toggle!(:admin)
         test_sign_in(fourth) # admin
         get :index
         expect(response).to have_selector("a", :href => "/users/2", :content => "delete")
@@ -304,7 +304,7 @@ describe UsersController, :type => :controller do
         expect(response).to have_selector("span.content", :content => mp2.content)
       end
 
-      # Exercise 11.5.6: 
+      # Exercise 11.5.6:
       it "should not see micropost delete links of other people's microposts" do
         mp3 = FactoryGirl.create(:micropost, :user => @second, :content => "Foo bar")
         mp4 = FactoryGirl.create(:micropost, :user => @second, :content => "Baz guux")
@@ -348,12 +348,12 @@ describe UsersController, :type => :controller do
       it "should destroy the user" do
         expect do
           delete :destroy, :id => @user
-        end.to change(User, :count).by(-1) 
+        end.to change(User, :count).by(-1)
       end
 
       it "should redirect to the users page" do
         delete :destroy, :id => @user
-        expect(flash[:success]).to match(/destroyed/) 
+        expect(flash[:success]).to match(/destroyed/)
         expect(response).to redirect_to(users_path)
       end
 
@@ -363,7 +363,7 @@ describe UsersController, :type => :controller do
         end.to change(User, :count).by(0)
       end
    end
- 
+
   end # delete/destroy
 
   describe "follow pages" do

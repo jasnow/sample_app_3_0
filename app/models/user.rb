@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name,  :presence => true, :length => { :maximum => 50 }
-  validates :email, :presence => true, 
+  validates :email, :presence => true,
                     :format => { :with => email_regex },
                     :uniqueness => { :case_sensitive => false }
 
@@ -113,9 +113,9 @@ class User < ActiveRecord::Base
 #  end
 
   def feed
-    # This is preliminary. See Chapter 12 for the full implementation. 
+    # This is preliminary. See Chapter 12 for the full implementation.
     #Micropost.where("user_id = ?", id)
-    Micropost.from_users_followed_by(self) 
+    Micropost.from_users_followed_by(self)
   end
 
   private

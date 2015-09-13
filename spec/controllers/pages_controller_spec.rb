@@ -33,9 +33,9 @@ describe PagesController, :type => :controller do
       it "should have the right follower/following contents" do
         get :home
         expect(response).to have_selector("a", :href => following_user_path(@user),
-                                           :content => "0 following") 
+                                           :content => "0 following")
         expect(response).to have_selector("a", :href => followers_user_path(@user),
-                                           :content => "1 follower") 
+                                           :content => "1 follower")
       end
     end
   end

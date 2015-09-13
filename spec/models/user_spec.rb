@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User, :type => :model do
   before(:each) do
-    @attr = { 
+    @attr = {
       :name => "Example User",
       :email => "user@example.com",
       :password => "foobar",
@@ -119,35 +119,35 @@ describe User, :type => :model do
   describe "password validations" do
 
     it "should require a password" do
-      expect(User.new(@attr.merge(:password => "", :password_confirmation => ""))).not_to be_valid 
+      expect(User.new(@attr.merge(:password => "", :password_confirmation => ""))).not_to be_valid
     end
 
     it "should require a matching password confirmation" do
-      expect(User.new(@attr.merge(:password_confirmation => "invalid"))).not_to be_valid 
+      expect(User.new(@attr.merge(:password_confirmation => "invalid"))).not_to be_valid
     end
 
     it "Good: should accept just long enough passwords" do
       pw = "a" * 6
       hash = @attr.merge(:password => pw, :password_confirmation => pw)
-      expect(User.new(hash)).to be_valid 
+      expect(User.new(hash)).to be_valid
     end
 
     it "Bad: should reject too short passwords" do
       tooshort = "a" * 5
       hash = @attr.merge(:password => tooshort, :password_confirmation => tooshort)
-      expect(User.new(hash)).not_to be_valid 
+      expect(User.new(hash)).not_to be_valid
     end
 
     it "Good: should reject almost too long passwords" do
       pw = "a" * 40
       hash = @attr.merge(:password => pw, :password_confirmation => pw)
-      expect(User.new(hash)).to be_valid 
+      expect(User.new(hash)).to be_valid
     end
 
     it "Bad: should reject too long passwords" do
       toolong = "a" * 41
       hash = @attr.merge(:password => toolong, :password_confirmation => toolong)
-      expect(User.new(hash)).not_to be_valid 
+      expect(User.new(hash)).not_to be_valid
     end
   end
 
@@ -159,11 +159,11 @@ describe User, :type => :model do
 
     it "should have an encrypted password attributes" do
       expect(@user).to respond_to(:encrypted_password)
-    end 
+    end
 
     it "should set the encrypted password" do
       expect(@user.encrypted_password).not_to be_blank
-    end 
+    end
 
     it "should be true if the passwords match" do
       expect(@user.has_password?(@attr[:password])).to be_truthy

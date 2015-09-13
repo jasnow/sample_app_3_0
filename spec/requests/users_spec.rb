@@ -13,7 +13,7 @@ describe "Users", :type => :request do
           click_button
           expect(response).to render_template('users/new')
           expect(response).to have_selector("div#error_explanation")
-        end.not_to change(User, :count) 
+        end.not_to change(User, :count)
       end
 
       it "should not sign a user in" do

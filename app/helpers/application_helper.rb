@@ -17,28 +17,28 @@ module ApplicationHelper
   ######################################################################
   ## Exercise 11.5.1
 
-  def warn_if_char_count_exceeded(field_id, update_id, 
+  def warn_if_char_count_exceeded(field_id, update_id,
     maximum_number_of_chars, options = {})
 
     ## 1. Simple counter ------------------------------------------------
 
-    # function = 
-"var remaining_chars = $(#{maximum_number_of_chars}) - $F('#{field_id}').length; 
+    # function =
+"var remaining_chars = $(#{maximum_number_of_chars}) - $F('#{field_id}').length;
 
     # $('#{update_id}').innerHTML = remaining_chars;"
 
     ## 2. Countdown with red background if count is exceeded ------------
 
-    function = "var out = []; 
+    function = "var out = [];
 
-    var remaining_chars = $(#{maximum_number_of_chars}) - $F('#{field_id}').length; 
+    var remaining_chars = $(#{maximum_number_of_chars}) - $F('#{field_id}').length;
 
-    if (remaining_chars >= 0) { 
-      out = remaining_chars; 
-      document.getElementById('#{field_id}').style.backgroundColor='white' 
-    } else { 
-      out = 'Too long by ' + remaining_chars; 
-      document.getElementById('#{field_id}').style.backgroundColor='red' 
+    if (remaining_chars >= 0) {
+      out = remaining_chars;
+      document.getElementById('#{field_id}').style.backgroundColor='white'
+    } else {
+      out = 'Too long by ' + remaining_chars;
+      document.getElementById('#{field_id}').style.backgroundColor='red'
     }
 
     $('#{update_id}').innerHTML = out;"
