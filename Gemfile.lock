@@ -52,7 +52,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
-    ffi (1.9.10)
+    ffi (1.9.11)
     gravatar_image_tag (1.2.0)
     i18n (0.5.4)
     iniparse (1.4.2)
@@ -168,4 +168,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.12.5
+   1.11.2
