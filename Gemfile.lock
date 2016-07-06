@@ -52,7 +52,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
-    ffi (1.9.11)
+    ffi (1.9.12)
     gravatar_image_tag (1.2.0)
     i18n (0.5.4)
     iniparse (1.4.2)
@@ -135,7 +135,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.50)
+    tzinfo (0.3.51)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
