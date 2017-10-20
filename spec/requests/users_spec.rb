@@ -41,7 +41,7 @@ describe "Users", :type => :request do
       end
 
       it "should sign a user in and out" do
-        user = FactoryGirl.create(:user)
+        user = FactoryBot.create(:user)
         visit signin_path
         fill_in :email,    :with => user.email
         fill_in :password, :with => user.password

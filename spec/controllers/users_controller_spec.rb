@@ -5,13 +5,13 @@ describe UsersController, :type => :controller do
 
   describe "GET 'show'" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
     end
 
     # Exercise 11.5.4:
     it "should paginate microposts" do
-      35.times { FactoryGirl.create(:micropost, :user => @user, :content => "foo") }
-      FactoryGirl.create(:micropost, :user => @user, :content => "a" * 55)
+      35.times { FactoryBot.create(:micropost, :user => @user, :content => "foo") }
+      FactoryBot.create(:micropost, :user => @user, :content => "a" * 55)
       get :show, :id => @user
       expect(response).to have_selector('div.pagination')
     end
@@ -122,7 +122,7 @@ describe UsersController, :type => :controller do
   describe "GET 'edit'" do
 
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       test_sign_in(@user)
     end
 
@@ -146,7 +146,7 @@ describe UsersController, :type => :controller do
   describe "PUT 'update'" do
 
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       test_sign_in(@user)
     end
 
@@ -194,7 +194,7 @@ describe UsersController, :type => :controller do
 
   describe "authentication of edit/update pages" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
     end
 
     describe "for non-signed-in users" do
@@ -212,7 +212,7 @@ describe UsersController, :type => :controller do
 
     describe "for signed-in users" do
       before(:each) do
-        wrong_user = FactoryGirl.create(:user, :email => "user@example.net")
+        wrong_user = FactoryBot.create(:user, :email => "user@example.net")
         test_sign_in(wrong_user)
       end
 
@@ -240,12 +240,12 @@ describe UsersController, :type => :controller do
 
     describe "for signed-in users" do
       before(:each) do
-        @user = test_sign_in(FactoryGirl.create(:user))
-        @second = FactoryGirl.create(:user, :email => "another@example.com")
-        third  = FactoryGirl.create(:user, :email => "another@example.net")
+        @user = test_sign_in(FactoryBot.create(:user))
+        @second = FactoryBot.create(:user, :email => "another@example.com")
+        third  = FactoryBot.create(:user, :email => "another@example.net")
         @users = [@user, @second, third]
         30.times do
-          @users << FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
+          @users << FactoryBot.create(:user, :email => FactoryBot.generate(:email))
         end
       end
 
@@ -276,7 +276,7 @@ describe UsersController, :type => :controller do
 
       # Exercise 11.5..2:
       it "should display the micropost count" do
-        10.times { FactoryGirl.create(:micropost, :user => @user, :content => "foo") }
+        10.times { FactoryBot.create(:micropost, :user => @user, :content => "foo") }
         get :show, :id => @user
         expect(response).to have_selector('td.sidebar', :content => @user.microposts.count.to_s)
       end
@@ -289,7 +289,7 @@ describe UsersController, :type => :controller do
 
       it "should see delete links if admin" do
         skip
-        fourth = FactoryGirl.create(:user, :email => "seedelete@example.com")
+        fourth = FactoryBot.create(:user, :email => "seedelete@example.com")
         fourth.toggle!(:admin)
         test_sign_in(fourth) # admin
         get :index
@@ -297,8 +297,8 @@ describe UsersController, :type => :controller do
       end
 
       it "should show the user's microposts" do
-        mp1 = FactoryGirl.create(:micropost, :user => @user, :content => "Foo bar")
-        mp2 = FactoryGirl.create(:micropost, :user => @user, :content => "Baz guux")
+        mp1 = FactoryBot.create(:micropost, :user => @user, :content => "Foo bar")
+        mp2 = FactoryBot.create(:micropost, :user => @user, :content => "Baz guux")
         get :show, :id => @user
         expect(response).to have_selector("span.content", :content => mp1.content)
         expect(response).to have_selector("span.content", :content => mp2.content)
@@ -306,8 +306,8 @@ describe UsersController, :type => :controller do
 
       # Exercise 11.5.6:
       it "should not see micropost delete links of other people's microposts" do
-        mp3 = FactoryGirl.create(:micropost, :user => @second, :content => "Foo bar")
-        mp4 = FactoryGirl.create(:micropost, :user => @second, :content => "Baz guux")
+        mp3 = FactoryBot.create(:micropost, :user => @second, :content => "Foo bar")
+        mp4 = FactoryBot.create(:micropost, :user => @second, :content => "Baz guux")
         get :show, :id => @user
         expect(response).not_to have_selector("span.content", :content => mp3.content)
         expect(response).not_to have_selector("span.content", :content => mp4.content)
@@ -321,7 +321,7 @@ describe UsersController, :type => :controller do
 
   describe "DELETE 'destory'" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
     end
 
     describe "as a non-signed-in user" do
@@ -341,7 +341,7 @@ describe UsersController, :type => :controller do
 
     describe "as an admin user" do
       before(:each) do
-        @admin = FactoryGirl.create(:user, :email => "admin@example.com", :admin => true)
+        @admin = FactoryBot.create(:user, :email => "admin@example.com", :admin => true)
         test_sign_in(@admin)
       end
 
@@ -381,8 +381,8 @@ describe UsersController, :type => :controller do
 
     describe "when signed in" do
       before(:each) do
-        @user = test_sign_in(FactoryGirl.create(:user))
-        @other_user = FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
+        @user = test_sign_in(FactoryBot.create(:user))
+        @other_user = FactoryBot.create(:user, :email => FactoryBot.generate(:email))
         @user.follow!(@other_user)
       end
 

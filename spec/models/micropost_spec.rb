@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Micropost, :type => :model do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @attr = { :content => "value for content" }
   end
 
@@ -41,8 +41,8 @@ describe Micropost, :type => :model do
 
   describe "from_users_followed_by" do
     before(:each) do
-      @other_user = FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
-      @third_user = FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
+      @other_user = FactoryBot.create(:user, :email => FactoryBot.generate(:email))
+      @third_user = FactoryBot.create(:user, :email => FactoryBot.generate(:email))
 
       @user_post  = @user.microposts.create!(:content => "foo")
       @other_post = @other_user.microposts.create!(:content => "bar")

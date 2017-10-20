@@ -63,7 +63,7 @@ describe User, :type => :model do
   describe "relationships" do
     before(:each) do
       @user = User.create!(@attr)
-      @followed = FactoryGirl.create(:user)
+      @followed = FactoryBot.create(:user)
     end
 
     it "should have a relationships method" do
@@ -213,8 +213,8 @@ describe User, :type => :model do
   describe "micropost associations" do
     before(:each) do
       @user = User.create(@attr)
-      @mp1 = FactoryGirl.create(:micropost, :user => @user, :created_at => 1.day.ago)
-      @mp2 = FactoryGirl.create(:micropost, :user => @user, :created_at => 1.hour.ago)
+      @mp1 = FactoryBot.create(:micropost, :user => @user, :created_at => 1.day.ago)
+      @mp2 = FactoryBot.create(:micropost, :user => @user, :created_at => 1.hour.ago)
     end
 
     it "should have a microposts attribute" do
@@ -247,14 +247,14 @@ describe User, :type => :model do
       end
 
       it "should not include a different user's microposts" do
-        mp3 = FactoryGirl.create(:micropost,
-                      :user => FactoryGirl.create(:user, :email => FactoryGirl.generate(:email)))
+        mp3 = FactoryBot.create(:micropost,
+                      :user => FactoryBot.create(:user, :email => FactoryBot.generate(:email)))
         expect(@user.feed).not_to include(mp3)
       end
 
       it "should include the microposts of followed users" do
-        followed = FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
-        mp3 = FactoryGirl.create(:micropost, :user => followed)
+        followed = FactoryBot.create(:user, :email => FactoryBot.generate(:email))
+        mp3 = FactoryBot.create(:micropost, :user => followed)
         @user.follow!(followed)
         expect(@user.feed).to include(mp3)
       end

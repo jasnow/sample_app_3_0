@@ -26,7 +26,7 @@ group :test do
   gem 'rspec'
   gem 'webrat'
   gem 'spork'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'test-unit'
 end
 
