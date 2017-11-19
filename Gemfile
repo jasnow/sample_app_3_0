@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.0.20'
 
-gem 'rake'
 gem 'taps'
 gem 'gravatar_image_tag'
 gem 'will_paginate'

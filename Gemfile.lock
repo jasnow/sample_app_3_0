@@ -155,7 +155,6 @@ DEPENDENCIES
   overcommit
   pg
   rails (= 3.0.20)
-  rake
   rspec
   rspec-rails (= 2.99.0)
   spork
