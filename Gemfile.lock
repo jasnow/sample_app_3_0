@@ -64,7 +64,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     mini_portile2 (2.3.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     overcommit (0.41.0)
       childprocess (~> 0.6, >= 0.6.3)
