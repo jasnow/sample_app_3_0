@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   factory :user do
-    name                  "Al Snow"
-    email                 "jasnow@hotmail.com"
-    password              "foobar"
-    password_confirmation "foobar"
+    name                  { "Al Snow" }
+    email                 { "jasnow@hotmail.com" }
+    password              { "foobar" }
+    password_confirmation { "foobar" }
   end
 end
 
@@ -17,7 +17,7 @@ end
 
 FactoryBot.define do
   factory :micropost do
-    content     "Foo bar"
+    content     { "Foo bar" }
     association :user
   end
 end

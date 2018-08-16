@@ -12,6 +12,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'rubocop-rspec'
   gem 'sqlite3'
 end
 
