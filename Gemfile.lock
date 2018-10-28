@@ -141,7 +141,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.54)
+    tzinfo (0.3.55)
     unicode-display_width (1.4.0)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
