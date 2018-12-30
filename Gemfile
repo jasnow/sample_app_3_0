@@ -17,11 +17,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'autotest'
-  gem 'autotest-rails-pure'
-  gem 'autotest-growl'
   gem 'faker'
-  gem 'autotest-fsevent'
   gem 'rspec'
   gem 'webrat'
   gem 'spork'
