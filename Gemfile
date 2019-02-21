@@ -13,6 +13,7 @@ end
 
 group :development, :test do
   gem 'rubocop-rspec'
+  gem 'rubocop', '0.64.0' # 2/21/2019: LOCKED DOWN
   gem 'sqlite3', '1.3.13' # 2/6/2019: LOCKED DOWN
 end
 
