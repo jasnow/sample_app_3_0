@@ -69,7 +69,7 @@ GEM
       ast (~> 2.4.0)
     pg (1.2.3)
     polyglot (0.3.5)
-    power_assert (1.1.6)
+    power_assert (1.1.7)
     powerpack (0.1.2)
     rack (1.2.8)
     rack-mount (0.6.14)
